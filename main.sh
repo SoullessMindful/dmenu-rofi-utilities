@@ -1,19 +1,24 @@
 #!/bin/sh
 
+source ./config.sh
+
 document_menu() {
   local directory=$1
   local document_kind=$2
+  local document_ext=$3
+  echo $document_ext
   local files
   files=$(
-    find "$directory"\
+    find $directory\
     -type f\
-    \( -iname "*.pdf" -o -iname "*.djvu" \)\
-    -printf "%f\n"
+    -printf "%f\n" |
+    grep "$document_ext" |
+    sort
   )
   local file=$(
     echo "$files" |
     $LAUNCHER -i\
-    -p $document_kind
+    -p "$document_kind"
   )
   local file_path=$(
     find "$directory"\
@@ -43,7 +48,7 @@ note_menu() {
   local note=$(
     echo "$all_notes" |
     $LAUNCHER -i\
-    -p $note_mode
+    -p "$note_mode"
   )
 
   case $note in
@@ -103,15 +108,13 @@ main() {
       note_menu
       ;;
     $book_mode)
-      document_menu $book_directory $mode
+      document_menu "$book_directory" "$mode" "$book_ext"
       ;;
     $article_mode)
-      document_menu $article_directory $mode
+      document_menu "$article_directory" "$mode" "$article_ext"
       ;;
   esac
 }
-
-source ./config.sh
 
 main
 
