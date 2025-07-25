@@ -3,7 +3,7 @@
 LAUNCHER="rofi -dmenu" # LAUNCHER=dmenu
 TERMINAL=kitty
 EDITOR=nvim
-VIEWER=xreader
+VIEWER=zathura
 
 emojis=📗📘📙📜📃📓🗒️📝✒️🖊️🖋️✏️📋🧑🏻‍🏫📈📉📊✅☑️❎⬜🎶🎵▶️⏯️⏸️⏹️🗑️↩️🎥📽️📀🎬⚙️📶🌐🕸️
 
