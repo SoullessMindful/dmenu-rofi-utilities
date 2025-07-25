@@ -1,26 +1,5 @@
 #!/bin/sh
 
-LAUNCHER="rofi -dmenu" # LAUNCHER=dmenu
-TERMINAL=kitty
-EDITOR=nvim
-VIEWER=xreader
-
-emojis=📗📘📙📜📃📓🗒️📝✒️🖊️🖋️✏️📋🧑🏻‍🏫📈📉📊✅☑️❎⬜🎶🎵▶️⏯️⏸️⏹️🗑️↩️🎥📽️📀🎬⚙️📶🌐🕸️
-
-note_mode="📑 Notes"
-book_mode="📘 Books"
-article_mode="📜 Articles"
-modes=""
-modes+=$note_mode
-modes+="\n"
-modes+=$book_mode
-modes+="\n"
-modes+=$article_mode
-
-note_directory="/data/notes/"
-book_directory="/data/books/"
-article_directory="/data/articles/"
-
 document_menu() {
   local directory=$1
   local document_kind=$2
@@ -131,6 +110,8 @@ main() {
       ;;
   esac
 }
+
+source ./config.sh
 
 main
 
