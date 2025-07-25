@@ -24,3 +24,7 @@ article_directory="/data/articles/"
 article_ext=".pdf$\|.djvu$"
 modes+="\n"
 modes+=$article_mode
+
+power_mode="⚡ Power"
+modes+="\n"
+modes+=$power_mode

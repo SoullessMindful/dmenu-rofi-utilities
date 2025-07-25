@@ -97,6 +97,24 @@ note_add() {
   note_menu
 }
 
+power_menu() {
+  local action=$(
+    echo -e "🌛 Suspend\n🔁 Reboot\n🔌 Shutdown" |
+    $LAUNCHER -i -p "$power_mode"
+  )
+  case $action in
+    "🌛 Suspend")
+      systemctl suspend
+      ;;
+    "🔁 Reboot")
+      systemctl reboot
+      ;;
+    "🔌 Shutdown")
+      systemctl poweroff
+      ;;
+  esac
+}
+
 main() {
   local mode=$(
     echo -e $modes |
@@ -112,6 +130,9 @@ main() {
       ;;
     $article_mode)
       document_menu "$article_directory" "$mode" "$article_ext"
+      ;;
+    $power_mode)
+      power_menu
       ;;
   esac
 }
