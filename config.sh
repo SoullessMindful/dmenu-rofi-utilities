@@ -25,6 +25,16 @@ article_ext=".pdf$|.djvu$"
 modes+="\n"
 modes+=$article_mode
 
+# by default requires xournalpp
+# can be replaced with any other whiteboard application
+whiteboard_mode="🧑🏻‍🏫 Whiteboards"
+whiteboard_directory="/data/whiteboards/"
+whiteboard_cmd="xournalpp"
+whiteboard_ext=".xopp$"
+whiteboard_template="$(pwd)/whiteboard_template.xopp"
+modes+="\n"
+modes+=$whiteboard_mode
+
 power_mode="⚡ Power"
 modes+="\n"
 modes+=$power_mode
