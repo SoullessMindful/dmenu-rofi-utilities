@@ -15,13 +15,13 @@ modes+=$note_mode
 
 book_mode="📘 Books"
 book_directory="/data/books/"
-book_ext=".pdf$\|.djvu$\|.epub$"
+book_ext=".pdf$|.djvu$|.epub$"
 modes+="\n"
 modes+=$book_mode
 
 article_mode="📜 Articles"
 article_directory="/data/articles/"
-article_ext=".pdf$\|.djvu$"
+article_ext=".pdf$|.djvu$"
 modes+="\n"
 modes+=$article_mode
 

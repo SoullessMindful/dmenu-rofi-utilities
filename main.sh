@@ -9,10 +9,11 @@ document_menu() {
   echo $document_ext
   local files
   files=$(
-    find $directory\
+    cd "$directory" &&
+    find .\
     -type f\
-    -printf "%f\n" |
-    grep "$document_ext" |
+    -printf "%P\n" |
+    grep -E "$document_ext" |
     sort
   )
   local file=$(
@@ -22,7 +23,7 @@ document_menu() {
   )
   local file_path=$(
     find "$directory"\
-    -type f -name "$file"
+    -type f -wholename "*/$file"
   )
   if [[ -n "$file_path" ]]; then
     $VIEWER "$file_path"
