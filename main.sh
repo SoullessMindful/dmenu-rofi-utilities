@@ -171,8 +171,8 @@ whiteboard_menu() {
   whiteboards=$(
     find "$whiteboard_directory"\
     -type f\
-    -name "*.xopp"\
-    -printf "%f\n" |
+    -printf "%P\n" |
+    grep -E "$whiteboard_ext" |
     sort -r
   )
 
