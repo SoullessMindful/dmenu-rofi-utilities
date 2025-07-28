@@ -13,6 +13,11 @@ note_mode="📑 Notes"
 note_directory="/data/notes/"
 modes+=$note_mode
 
+todo_mode="☑️ Todos"
+todo_directory="/data/todos/"
+modes+="\n"
+modes+=$todo_mode
+
 book_mode="📘 Books"
 book_directory="/data/books/"
 book_ext=".pdf$|.djvu$|.epub$"
