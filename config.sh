@@ -18,6 +18,11 @@ todo_directory="/data/todos/"
 modes+="\n"
 modes+=$todo_mode
 
+list_mode="📃 Lists"
+list_directory="/data/lists/"
+modes+="\n"
+modes+=$list_mode
+
 book_mode="📘 Books"
 book_directory="/data/books/"
 book_ext=".pdf$|.djvu$|.epub$"

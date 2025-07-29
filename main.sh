@@ -165,6 +165,101 @@ todo_add() {
   todo_menu
 }
 
+list_menu() {
+  local all_lists="📃 Add"
+  local lists
+  lists=$(
+    ls "$list_directory" -t
+  )
+
+  if [[ -n "$lists" ]]; then
+    all_lists+=$'\n'
+    all_lists+=$lists
+  fi
+  
+  local list=$(
+    echo "$all_lists" |
+    $LAUNCHER -i\
+    -p "$list_mode"
+  )
+
+  case $list in
+    "📃 Add")
+      list_add
+      ;;
+    *)
+      list_inner_menu "$list"
+      ;;
+  esac
+}
+
+list_inner_menu() {
+  local list_name="$1"
+  local list_path="$list_directory/$list_name"
+  local all_list_items="📃 Add item"
+  local list_items=$(cat "$list_path")
+  
+  if [[ -n "$list_items" ]]; then
+    all_list_items+=$'\n'
+    all_list_items+=$list_items
+  fi
+
+  local list_item=$(
+    echo "$all_list_items" |
+    $LAUNCHER -i\
+    -p "$list_name"
+  )
+
+  case $list_item in
+    "📃 Add item")
+      local item_content="$(
+        $LAUNCHER -i -p "Item content"
+      )"
+
+      if [[ -n "$item_content" ]]; then
+        echo "$item_content" >> "$list_path"
+      fi
+
+      list_inner_menu "$list_name"
+      ;;
+    *)
+      local action=$(
+        # edit remove or back
+        echo -e "📝 Edit item\n🗑️ Remove item\n↩️ Back" |
+        $LAUNCHER -i -p "$list_item"
+      )
+      case $action in
+        "📝 Edit item")
+          local new_content="$(
+            $LAUNCHER -i -p "New content for $list_item"
+          )"
+          if [[ -n "$new_content" ]]; then
+            sed -i "s/^$list_item\$/$new_content/" "$list_path"
+          fi
+          list_inner_menu "$list_name"
+          ;;
+        "🗑️ Remove item")
+          sed -i "/^$list_item$/d" "$list_path"
+          list_inner_menu "$list_name"
+          ;;
+        "↩️ Back")
+          list_menu
+          ;;
+      esac
+      ;;
+  esac
+}
+
+list_add() {
+  local list_name="$(
+    $LAUNCHER -i -p "List name"
+  ).txt"
+  local list_path="$list_directory/$list_name"
+  touch "$list_path"
+
+  list_inner_menu "$list_name"
+}
+
 whiteboard_menu() {
   local all_whiteboards="🧑🏻‍🏫 Add"
   local whiteboards
@@ -260,6 +355,9 @@ main() {
       ;;
     $todo_mode)
       todo_menu
+      ;;
+    $list_mode)
+      list_menu
       ;;
     $book_mode)
       document_menu "$book_directory" "$mode" "$book_ext"
