@@ -404,6 +404,9 @@ main() {
     $whiteboard_mode)
       whiteboard_menu
       ;;
+    $draw_on_screen_mode)
+      $draw_on_screen_cmd
+      ;;
     $power_mode)
       power_menu
       ;;

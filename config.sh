@@ -45,6 +45,13 @@ whiteboard_template="$(pwd)/whiteboard_template.xopp"
 modes+="\n"
 modes+=$whiteboard_mode
 
+# by default requires screenpen
+# can be replaced with any other screen drawing application
+draw_on_screen_mode="✒️ Draw on Screen"
+draw_on_screen_cmd="screenpen"
+modes+="\n"
+modes+=$draw_on_screen_mode
+
 power_mode="⚡ Power"
 modes+="\n"
 modes+=$power_mode
